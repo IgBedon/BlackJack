@@ -1,0 +1,27 @@
+{
+    "Bedon": {
+        "Name": "Bedon",
+        "ID": 92903565,
+        "Casino Chips": 1000
+    },
+    "Daniel": {
+        "Name": "Daniel",
+        "ID": 92900000,
+        "Casino Chips": 1000
+    },
+    "Davi": {
+        "Name": "Davi",
+        "ID": 92901111,
+        "Casino Chips": 1000
+    },
+    "Lira": {
+        "Name": "Lira",
+        "ID": 92902222,
+        "Casino Chips": 1000
+    },
+    "Luca": {
+        "Name": "Luca",
+        "ID": 92903333,
+        "Casino Chips": 1000
+    }
+}

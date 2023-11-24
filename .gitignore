@@ -1,0 +1,8 @@
+# Ignoring .venv
+.venv
+
+# Ignoring .idea
+.idea
+
+# Ignoring __pycache__
+__pycache__
