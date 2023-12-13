@@ -32,7 +32,11 @@ def catch_choice():
 def menu_choice(choice, register_list, players):
     match(choice):
         case 1:
-            name, id = register.sign_up()
+            name, id = register.sign_up(register_list)
+
+            if(name == ""):
+                return
+
             register.add_record(register_list, name, id)
             print()
 
@@ -47,9 +51,13 @@ def menu_choice(choice, register_list, players):
                 while(True):
                     try:
                         quantity = int(input("How many players?\n"))
-                        while(not stop):
-                            stop, players, players_counter = register.sign_in(register_list, players, quantity)
-                        break
+                        if(quantity == 1):
+                            print("You must have more than 1 player!")
+                            continue
+                        else:
+                            while(not stop):
+                                stop, players, players_counter = register.sign_in(register_list, players, quantity)
+                            break
                     except:
                         print("Invalid value!")
 

@@ -4,7 +4,7 @@ from .player import Player
 class NotLoggedPlayer(Player):
     def __init__(self, name):
         super().__init__()
-        self.__name = name
+        self.name = name
         self.__score = 0
     
     
@@ -25,3 +25,7 @@ class NotLoggedPlayer(Player):
 
     def get_score(self):
         return self.__score
+    
+    
+    def get_name(self):
+        return self.__name

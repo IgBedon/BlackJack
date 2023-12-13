@@ -31,3 +31,6 @@ class LoggedPlayer(Player):
     
     def get_name(self):
         return self.__name
+    
+    def get_id(self):
+        return self.__id

@@ -2,11 +2,14 @@ from poo_package.logged_player import LoggedPlayer
 from procedure_package import loader
 
 
-def sign_up():
+def sign_up(register_list):
     print("This is the Sign Up page!")
     while(True):
         try:
             name = input("Enter your name: ").title()
+            if(name in register_list):
+                print("\nOh oh, you are already signed up!\n")
+                return "", 0
             break
         except:
             print("Oh, you have entered an invalid input!")
@@ -14,9 +17,12 @@ def sign_up():
     while(True):
         try:
             cpf = int(input("Enter your EDV or CPF (Only numbers!): "))
+            if(cpf in register_list[name][cpf]):
+                print("Oh oh, someone already has this EDV or CPF!")
+                continue
             break
         except:
-            print("Oh, you have entered an invalid input!")
+            print("Oh oh, you have entered an invalid input!")
             continue
 
     return name, cpf
@@ -50,5 +56,7 @@ def sign_in(register_list, players, quantity):
         
         except:
             print("\nThis user isn't Signed up\n")
+            players_counter -= 1
+
     return True, players, players_counter
         
