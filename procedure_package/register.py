@@ -17,9 +17,11 @@ def sign_up(register_list):
     while(True):
         try:
             cpf = int(input("Enter your EDV or CPF (Only numbers!): "))
-            if(cpf in register_list[name][cpf]):
-                print("Oh oh, someone already has this EDV or CPF!")
-                continue
+
+            for key in register_list:
+                if (register_list[key]["ID"] == cpf):
+                    print("Oh oh, someone already has this EDV or CPF!")
+                    break
             break
         except:
             print("Oh oh, you have entered an invalid input!")

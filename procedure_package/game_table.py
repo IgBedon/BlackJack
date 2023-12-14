@@ -31,6 +31,7 @@ def start(players, players_counter):
 
 def ask_players(players, players_counter):
     os.system('cls')
+    print(type(players))
 
     for x in range (1, players_counter+1):
         try:

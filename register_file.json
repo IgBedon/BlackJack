@@ -23,5 +23,15 @@
         "Name": "Luca",
         "ID": 92903333,
         "Casino Chips": 1000
+    },
+    "Isa": {
+        "Name": "Isa",
+        "ID": 92903565,
+        "Casino Chips": 1000
+    },
+    "Bart": {
+        "Name": "Bart",
+        "ID": 92903565,
+        "Casino Chips": 1000
     }
 }
