@@ -46,14 +46,18 @@ def menu_choice(choice, register_list, players):
             if(not register_list):
                 print("We don't have users signed up yet.")
                 choice = catch_choice()
-                return menu_choice(choice, register_list)
+                return menu_choice(choice, register_list, players)
             else:
                 while(True):
                     try:
                         quantity = int(input("How many players?\n"))
-                        if(quantity == 1):
-                            print("You must have more than 1 player!")
+                        if(quantity == 1 or quantity <= 0):
+                            print("You must have at least 2 players!\n")
                             continue
+                        
+                        elif(quantity > len(register_list)):
+                            print(f"You must have less than {len(register_list)+1} players!\n")
+                        
                         else:
                             while(not stop):
                                 stop, players, players_counter = register.sign_in(register_list, players, quantity)
@@ -61,12 +65,14 @@ def menu_choice(choice, register_list, players):
                     except:
                         print("Invalid value!")
 
-            game_table.start(players, players_counter)
+                mode = "multiplayer"
+            game_table.start(players, players_counter, mode)
 
         case 3:
             players["Player 1"] = NotLoggedPlayer("Random Player")
             players["Player 2"] = NotLoggedPlayer("PC")
-            game_table.start(players, 2)
+            mode = "single"
+            game_table.start(players, 2, mode)
 
         case 4:
             print("Well, if you want... Finishing...")

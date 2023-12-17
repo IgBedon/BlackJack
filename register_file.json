@@ -9,29 +9,19 @@
         "ID": 92900000,
         "Casino Chips": 1000
     },
-    "Davi": {
-        "Name": "Davi",
-        "ID": 92901111,
-        "Casino Chips": 1000
-    },
     "Lira": {
         "Name": "Lira",
-        "ID": 4235234,
+        "ID": 92900001,
         "Casino Chips": 1000
     },
-    "Luca": {
-        "Name": "Luca",
-        "ID": 92903333,
+    "Davi": {
+        "Name": "Davi",
+        "ID": 92900002,
         "Casino Chips": 1000
     },
     "Isa": {
         "Name": "Isa",
-        "ID": 92903565,
-        "Casino Chips": 1000
-    },
-    "Bart": {
-        "Name": "Bart",
-        "ID": 92903565,
+        "ID": 92900003,
         "Casino Chips": 1000
     }
 }

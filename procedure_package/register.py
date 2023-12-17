@@ -15,16 +15,22 @@ def sign_up(register_list):
             print("Oh, you have entered an invalid input!")
             continue
     while(True):
+        validation = True
         try:
             cpf = int(input("Enter your EDV or CPF (Only numbers!): "))
 
             for key in register_list:
                 if (register_list[key]["ID"] == cpf):
-                    print("Oh oh, someone already has this EDV or CPF!")
+                    print("Oh oh, someone already has this EDV or CPF!\n")
+                    validation = False
                     break
+            if(not validation):
+                continue
+
+            print("\nRegistered!")
             break
         except:
-            print("Oh oh, you have entered an invalid input!")
+            print("Oh oh, you have entered an invalid input!\n")
             continue
 
     return name, cpf
@@ -48,15 +54,28 @@ def sign_in(register_list, players, quantity):
             print(f"Name: {name}")
 
         account = input("Choose your account [Insert name]: ")
-        try:
-            players_counter += 1
-            player_number = "Player "+str(players_counter)
-            players[player_number] = LoggedPlayer(register_list[account]["Name"], register_list[account]["ID"], register_list[account]["Casino Chips"])
-            print(register_list.get(account))
-            register_list.pop(account, "Error in Pop Method")
+
+        players_counter += 1
+        player_number = "Player "+str(players_counter)
+        if(account in register_list):
             print()
-        
-        except:
+
+            while(True):
+                try:
+                    bet = int(input("Enter the amount of chips you want to bet: "))
+                    if(bet <= register_list[account]["Casino Chips"] and bet >= 0):
+                        players[player_number] = LoggedPlayer(register_list[account]["Name"], register_list[account]["ID"], register_list[account]["Casino Chips"], bet)
+                        print(f"Name: {register_list[account]['Name']} \nID: {register_list[account]['ID']} \nCasino Chips: {register_list[account]['Casino Chips']} \nBet: {bet} Chips!")
+                        print("\nOk, you're ready!\n")
+
+                        register_list.pop(account, "Error in Pop Method")
+
+                        break
+                    else:
+                        print("You don't have enough Chips!\n")
+                except:
+                    print("This isn't a valid input!\n")
+        else:
             print("\nThis user isn't Signed up\n")
             players_counter -= 1
 
