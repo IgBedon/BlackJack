@@ -99,7 +99,7 @@ def calculate_result(players, players_counter):
             winner_score = score
             winner = players["Player "+str(x)].get_name()
         
-    print(f"The winner is: {winner} within a score of {winner_score}!\n\n\n")
+    print(f"The winner is: {winner} within a score of {winner_score}!\n\n")
 
     return winner
 
@@ -125,7 +125,7 @@ def calculate_bet(players, winner):
     casino_chips = players[winner_player].get_casino_chips()
     casino_chips += final_bet
     players[winner_player].set_casino_chips(casino_chips)
-    print(f"{players[winner_player].get_name()} is the WINNER and has received {final_bet} Chips! {players[winner_player].get_name()} has {players[winner_player].get_casino_chips()} now!\n\n\n")
+    print(f"{players[winner_player].get_name()} is the WINNER and has received {final_bet} Chips! {players[winner_player].get_name()} has {players[winner_player].get_casino_chips()} now!\n\n")
 
     register_list = loader.register_load()
     loader.register_overwriting(players, register_list)

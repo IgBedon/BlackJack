@@ -53,19 +53,24 @@ def sign_in(register_list, players, quantity):
         for name in register_list:
             print(f"Name: {name}")
 
-        account = input("Choose your account [Insert name]: ")
+        account = input("Choose your account [Insert name] or Enter 'Exit' to return: \n")
+
+        if(account.lower() == "exit"):
+            print()
+            return True, {}, 0
+
 
         players_counter += 1
         player_number = "Player "+str(players_counter)
         if(account in register_list):
-            print()
+            print(f"\nYou have {register_list[account]['Casino Chips']} Casino Chips!")
 
             while(True):
                 try:
                     bet = int(input("Enter the amount of chips you want to bet: "))
                     if(bet <= register_list[account]["Casino Chips"] and bet >= 0):
                         players[player_number] = LoggedPlayer(register_list[account]["Name"], register_list[account]["ID"], register_list[account]["Casino Chips"], bet)
-                        print(f"Name: {register_list[account]['Name']} \nID: {register_list[account]['ID']} \nCasino Chips: {register_list[account]['Casino Chips']} \nBet: {bet} Chips!")
+                        print(f"\nName: {register_list[account]['Name']} \nID: {register_list[account]['ID']} \nCasino Chips after Bet: {(register_list[account]['Casino Chips']-bet)} \nBet: {bet} Chips!")
                         print("\nOk, you're ready!\n")
 
                         register_list.pop(account, "Error in Pop Method")

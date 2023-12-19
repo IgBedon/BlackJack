@@ -65,6 +65,8 @@ def menu_choice(choice, register_list, players):
                     except:
                         print("Invalid value!")
 
+                if(not players):
+                    return
                 mode = "multiplayer"
             game_table.start(players, players_counter, mode)
 
