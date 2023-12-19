@@ -4,13 +4,10 @@ from procedure_package import loader
 from time import sleep
 import inquirer
 
-dealer = Dealer()
-
-
-
 
 def start(players, players_counter, mode):
-    
+    dealer = Dealer()
+
     print("Starting in")
     for sec in range(3):
         print(f"{sec+1}...")
@@ -20,25 +17,25 @@ def start(players, players_counter, mode):
         for _ in range(2):
             players["Player "+str(y)].receive_card(dealer.deal_card())
 
-    ask_players(players, players_counter, mode)
+    ask_players(players, players_counter, mode, dealer)
     print("Calculating result...")
     for sec in range(3):
         print(f"{sec+1}...")
         sleep(1)
-    winner = calculate_result(players, players_counter)
+    winners = calculate_result(players, players_counter)
 
     if(mode == "multiplayer"):
-        calculate_bet(players, winner)
+        calculate_bet(players, winners)
 
 
 
 
-def ask_players(players, players_counter, mode):
+def ask_players(players, players_counter, mode, dealer):
     os.system('cls')
 
     for x in range (1, players_counter+1):
         if(x == 2 and mode == "single"):
-            pc_choices(players, x)
+            pc_choices(players, x, dealer)
 
         else:
 
@@ -89,50 +86,92 @@ def ask_players(players, players_counter, mode):
 
 
 def calculate_result(players, players_counter):
-    winner_score = 0
-    winner = ""
+    highest_score = 0
+    winners = []
 
-    for x in range (1, players_counter+1):
-        score = players["Player "+str(x)].get_score()
+    for x in range(1, players_counter + 1):
+        score = players["Player " + str(x)].get_score()
 
-        if (score <= 21 and score > winner_score):
-            winner_score = score
-            winner = players["Player "+str(x)].get_name()
-        
-    print(f"The winner is: {winner} within a score of {winner_score}!\n\n")
+        if score <= 21:
+            if score > highest_score:
+                highest_score = score
+                winners = [players["Player " + str(x)].get_name()]
+            elif score == highest_score:
+                winners.append(players["Player " + str(x)].get_name())
 
-    return winner
+    if not winners:
+        print("Oh no, no one wins!")
 
-
-
-
-def calculate_bet(players, winner):
-    final_bet = 0
-    for player in players:
-        casino_chips = players[player].get_casino_chips()
-        casino_chips -= players[player].get_bet()
-        if(casino_chips<0):
-            casino_chips = 0
-        players[player].set_casino_chips(casino_chips)
-
-        final_bet += players[player].get_bet()
-
-        if(players[player].get_name() != winner):
-            print(f"{players[player].get_name()} has {players[player].get_casino_chips()} Casino Chips left!")
+    else:
+        if len(winners) == 1:
+            print(f"The winner is: {winners[0]} with a score of {highest_score}!\n")
         else:
-            winner_player = player
+            print(f"It's a tie! Players with the highest score ({highest_score}): {', '.join(winners)}!\n")
 
-    casino_chips = players[winner_player].get_casino_chips()
-    casino_chips += final_bet
-    players[winner_player].set_casino_chips(casino_chips)
-    print(f"{players[winner_player].get_name()} is the WINNER and has received {final_bet} Chips! {players[winner_player].get_name()} has {players[winner_player].get_casino_chips()} now!\n\n")
+    return winners
+
+
+
+
+
+def calculate_bet(players, winners):
+
+    if not winners:
+        print("Returning bets to players...\n")
+
+        for player in players:
+            print(f"{players[player].get_name()} has {players[player].get_casino_chips()} Casino Chips now!")
+        print()
+
+    elif(len(winners) == 1):
+        final_bet = 0
+        for player in players:
+            casino_chips = players[player].get_casino_chips()
+            casino_chips -= players[player].get_bet()
+            if(casino_chips<0):
+                casino_chips = 0
+            players[player].set_casino_chips(casino_chips)
+
+            final_bet += players[player].get_bet()
+
+            for winner in winners:
+                if(players[player].get_name() != winner):
+                    print(f"{players[player].get_name()} has {players[player].get_casino_chips()} Casino Chips left!")
+                else:
+                    winner_player = player
+
+        casino_chips = players[winner_player].get_casino_chips()
+        casino_chips += final_bet
+        players[winner_player].set_casino_chips(casino_chips)
+        print(f"{players[winner_player].get_name()} is the WINNER and has received {final_bet} Chips! {players[winner_player].get_name()} has {players[winner_player].get_casino_chips()} now!\n\n")
+
+    else:
+        winners_number = []
+        pot = 0
+        for player in players:
+            pot += (players[player].get_bet())
+            if(players[player].get_name() in winners):
+                winners_number.append(player)
+
+        for player in players:
+            if(player not in winners_number):
+                print(f"{players[player].get_name()} has {players[player].get_casino_chips()} Casino Chips now!")
+        print()
+
+        print("It's a tie, so we're going to divide the pot among the winners...")
+        for player_number in winners_number:
+            casino_chips = players[player_number].get_casino_chips()
+            casino_chips += pot // len(winners)
+            players[player_number].set_casino_chips(casino_chips)
+            print(f"{players[player_number].get_name()} has received {pot // len(winners)} Chips! {players[player_number].get_name()} has {players[player_number].get_casino_chips()} now!")
+        print()
 
     register_list = loader.register_load()
     loader.register_overwriting(players, register_list)
 
 
 
-def pc_choices(players, player_number):
+def pc_choices(players, player_number, dealer):
         
     while(True):
         score = players["Player "+str(player_number)].calculate_hand()
