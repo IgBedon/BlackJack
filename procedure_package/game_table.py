@@ -154,6 +154,12 @@ def calculate_bet(players, winners):
                 winners_number.append(player)
 
         for player in players:
+            casino_chips = players[player].get_casino_chips()
+            casino_chips -= players[player].get_bet()
+            if(casino_chips<0):
+                casino_chips = 0
+            players[player].set_casino_chips(casino_chips)
+
             if(player not in winners_number):
                 print(f"{players[player].get_name()} has {players[player].get_casino_chips()} Casino Chips now!")
         print()
