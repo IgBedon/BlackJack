@@ -2,12 +2,12 @@
     "Bedon": {
         "Name": "Bedon",
         "ID": 92903565,
-        "Casino Chips": 1000
+        "Casino Chips": 800
     },
     "Daniel": {
         "Name": "Daniel",
         "ID": 92900000,
-        "Casino Chips": 1000
+        "Casino Chips": 800
     },
     "Lira": {
         "Name": "Lira",
@@ -23,5 +23,10 @@
         "Name": "Isa",
         "ID": 92900003,
         "Casino Chips": 1000
+    },
+    "Clebinho": {
+        "Name": "Clebinho",
+        "ID": 92896142,
+        "Casino Chips": 1400
     }
 }

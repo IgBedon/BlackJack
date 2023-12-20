@@ -9,7 +9,7 @@ class Dealer:
     
     def set_cards(self):
         deck = []
-        for y in range (4):
+        for _ in range (4):
             for x in range (2, 10):  
                 deck.append(Card(str(x), x))
 

@@ -14,6 +14,7 @@ def sign_up(register_list):
         except:
             print("Oh, you have entered an invalid input!")
             continue
+
     while(True):
         validation = True
         try:
@@ -37,6 +38,7 @@ def sign_up(register_list):
 
 
 def add_record(register_list, name, id):
+    # Separating in a dictionary to save in JSON
     player_data = {
         "Name":name,
         "ID":id,
@@ -49,6 +51,8 @@ def add_record(register_list, name, id):
 
 def sign_in(register_list, players, quantity):
     players_counter = 0
+
+    # Method to Choose your player
     while(players_counter<quantity):
         for name in register_list:
             print(f"Name: {name}")
@@ -61,7 +65,11 @@ def sign_in(register_list, players, quantity):
 
 
         players_counter += 1
+
+        # Setting the player like Player 1, Player 2...
         player_number = "Player "+str(players_counter)
+
+        # Verification of account is registered and getting bet informations
         if(account in register_list):
             print(f"\nYou have {register_list[account]['Casino Chips']} Casino Chips!")
 
@@ -71,7 +79,9 @@ def sign_in(register_list, players, quantity):
                     if(bet <= register_list[account]["Casino Chips"] and bet >= 0):
                         players[player_number] = LoggedPlayer(register_list[account]["Name"], register_list[account]["ID"], register_list[account]["Casino Chips"], bet)
                         print(f"\nName: {register_list[account]['Name']} \nID: {register_list[account]['ID']} \nCasino Chips after Bet: {(register_list[account]['Casino Chips']-bet)} \nBet: {bet} Chips!")
+                        print("\n====================================================================")
                         print("\nOk, you're ready!\n")
+                        print("====================================================================\n")
 
                         register_list.pop(account, "Error in Pop Method")
 

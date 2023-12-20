@@ -9,6 +9,7 @@ def introduction():
     print("\n------------------------------------------------------------------\n")
     
     
+# Code block to catch menu choice
 def catch_choice():
     questions = [
         inquirer.List('size',
@@ -29,6 +30,7 @@ def catch_choice():
             return 4
         
 
+# Do something using menu choice
 def menu_choice(choice, register_list, players):
     match(choice):
         case 1:
@@ -43,12 +45,14 @@ def menu_choice(choice, register_list, players):
         case 2:
             stop = False
 
+            # Verification if list doesn't exist or is blank
             if(not register_list):
                 print("We don't have users signed up yet.")
                 choice = catch_choice()
                 return menu_choice(choice, register_list, players)
             else:
                 while(True):
+                    # Verification of player quantity
                     try:
                         quantity = int(input("How many players?\n"))
                         if(quantity == 1 or quantity <= 0):
@@ -71,6 +75,7 @@ def menu_choice(choice, register_list, players):
             game_table.start(players, players_counter, mode)
 
         case 3:
+            # Start game against PC
             players["Player 1"] = NotLoggedPlayer("Random Player")
             players["Player 2"] = NotLoggedPlayer("PC")
             mode = "single"
@@ -83,6 +88,7 @@ def menu_choice(choice, register_list, players):
 
 def start():
     introduction()
+    # Game process
     while(True):
         players = {}
         register_list = loader.register_load()
