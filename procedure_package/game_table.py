@@ -215,7 +215,6 @@ def pc_choices(players, player_number, dealer):
 
         # Calculating
         percentage_of_win = len(valid_cards)/len(dealer.deck)
-        print(percentage_of_win)
 
         if(percentage_of_win>0.85):
             players["Player "+str(player_number)].receive_card(dealer.deal_card())
