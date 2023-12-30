@@ -59,10 +59,9 @@ def sign_in(register_list, players, quantity):
 
         account = input("Choose your account [Insert name] or Enter 'Exit' to return: \n").title()
 
-        if(account.title().lower() == "Exit"):
+        if(account.title() == "Exit"):
             print()
             return True, {}, 0
-
 
         players_counter += 1
 
